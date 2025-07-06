@@ -13,6 +13,6 @@
 # NEW: Redirect rule to proxy files from GitHub
 # This makes your Netlify domain act as a mask for your GitHub file URLs.
 [[redirects]]
-  from = "/Assets/*"
-  to = "https://raw.githubusercontent.com/anaroulhasan/themes/main/Assets/:splat"
+  from = "/assets/*"
+  to = "https://raw.githubusercontent.com/anaroulhasan/themes/main/assets/:splat"
   status = 200
