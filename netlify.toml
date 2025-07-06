@@ -1,0 +1,11 @@
+# Main build settings
+[build]
+  # Directory to publish (your frontend files)
+  publish = "public"
+  # Directory where your serverless functions are located
+  functions = "netlify/functions"
+
+# Function-specific settings
+[functions]
+  # Use the esbuild bundler for faster builds
+  node_bundler = "esbuild"
