@@ -9,3 +9,10 @@
 [functions]
   # Use the esbuild bundler for faster builds
   node_bundler = "esbuild"
+
+# NEW: Redirect rule to proxy files from GitHub
+# This makes your Netlify domain act as a mask for your GitHub file URLs.
+[[redirects]]
+  from = "/Assets/*"
+  to = "https://raw.githubusercontent.com/anaroulhasan/themes/main/Assets/:splat"
+  status = 200
