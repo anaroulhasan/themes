@@ -3,77 +3,85 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ThemeStash Post Generator (with Gallery)</title>
+    <title>ThemeStash Post Generator [Tailwind CSS]</title>
+    <!-- Tailwind CSS CDN Script -->
+    <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        :root { --contentL: #ddd; --linkC: #007bff; --bg: #f9f9f9; --textC: #333; }
-        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; background-color: var(--bg); color: var(--textC); padding: 20px; line-height: 1.6; }
-        .container { max-width: 800px; margin: 0 auto; background: #fff; padding: 20px 30px; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.08); }
-        h1, h2 { text-align: center; color: var(--linkC); border-bottom: 1px solid var(--contentL); padding-bottom: 10px; margin-bottom: 25px; }
-        label { margin-top: 15px; font-weight: 600; display: block; color: #555; }
-        input[type="text"], input[type="number"], input[type="url"], textarea, select {
-            padding: 12px; margin-top: 5px; border-radius: 5px; border: 1px solid var(--contentL);
-            font-size: 16px; width: 100%; box-sizing: border-box; transition: border-color 0.2s, box-shadow 0.2s;
+        /* A simple style for the file input button */
+        input[type="file"]::file-selector-button {
+            @apply bg-slate-100 text-slate-700 font-semibold border-0 px-4 py-2 rounded-lg cursor-pointer hover:bg-slate-200 transition-colors;
         }
-        input:focus, textarea:focus, select:focus { border-color: var(--linkC); box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.2); outline: none; }
-        input[type="file"] { margin-top: 5px; padding: 8px; border: 1px solid #ccc; border-radius: 5px; }
-        input[type="button"] {
-            background-color: var(--linkC); color: white; width: 100%; padding: 14px; border: 0;
-            border-radius: 5px; cursor: pointer; font-size: 18px; margin-top: 25px; font-weight: bold;
-            transition: background-color 0.2s;
-        }
-        input[type="button"]:hover { background-color: #0056b3; }
-        input[type="button"]:disabled { background-color: #ccc; cursor: not-allowed; }
-        .msrequired::after { content: "*"; color: red; margin-left: 4px; }
-        #outputContainer { margin-top: 30px; }
-        pre { background-color: #f6f8fa; border: 1px solid #ddd; padding: 15px; border-radius: 6px; white-space: pre-wrap; word-wrap: break-word; max-height: 500px; overflow-y: auto; color: #333; font-family: 'Courier New', Courier, monospace; }
-        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem 1.5rem; }
     </style>
 </head>
-<body>
-    <div class="container">
-        <h1>ThemeStash Post Generator</h1>
-        
-        <form id="postForm" class="ms-form">
-            <h2>Post Details</h2>
-            <div class="grid">
-                 <div><label for="postName" class="msrequired">Name</label><input type="text" id="postName" value="Apmody" required></div>
-                <div><label for="platform">Platform</label><select id="platform"><option value="Blogger" selected>Blogger</option><option value="WordPress">WordPress</option></select></div>
-                <div><label for="developer">Developer</label><input type="text" id="developer" value="Arman Kumar"></div>
-                <div><label for="releaseDate">Release Date</label><input type="text" id="releaseDate"></div>
-                <div><label for="lastUpdate">Last Update</label><input type="text" id="lastUpdate"></div>
-                <div><label for="version">Version</label><input type="text" id="version" value="2.0"></div>
-                <div><label for="views">Views</label><input type="number" id="views" value="200"></div>
-                <div><label for="downloads">Downloads</label><input type="number" id="downloads" value="40"></div>
-                <div><label for="format">Format</label><select id="format"><option value="XML" selected>XML</option><option value="ZIP">ZIP</option></select></div>
-                <div><label for="size">Size</label><input type="text" id="size" value="121KB"></div>
-                <div><label for="license">License</label><select id="license"><option value="Personal Use" selected>Personal Use</option><option value="Commercial Use">Commercial Use</option></select></div>
-                <div><label for="responsive">Responsive</label><select id="responsive"><option value="Yes" selected>Yes</option><option value="No">No</option></select></div>
-                <div><label for="darkMode">Dark Mode</label><select id="darkMode"><option value="Supported" selected>Supported</option><option value="Not Supported">Not Supported</option></select></div>
-                <div><label for="browsers">Browsers</label><input type="text" id="browsers" value="Chrome, Firefox, Edge"></div>
-                <div><label for="schemaMarkup">Schema Markup</label><select id="schemaMarkup"><option value="Yes" selected>Yes</option><option value="No">No</option></select></div>
-                <div><label for="languages">Languages</label><input type="text" id="languages" value="English, Bangla"></div>
-                <div><label for="colorOptions">Color Options</label><input type="text" id="colorOptions" value="Multiple"></div>
-                <div><label for="documentation">Documentation</label><select id="documentation"><option value="Included" selected>Included</option><option value="Online">Online</option></select></div>
+<body class="bg-slate-100 font-sans text-slate-800">
+
+    <div class="max-w-4xl mx-auto p-4 md:p-8">
+        <header class="text-center mb-10">
+            <h1 class="text-3xl md:text-4xl font-bold text-sky-600">ThemeStash Post Generator</h1>
+            <p class="text-slate-500 mt-2">Create your blog posts with ease and style.</p>
+        </header>
+
+        <form id="postForm" class="space-y-8">
+            <!-- Post Details Section -->
+            <div class="bg-white p-6 md:p-8 rounded-2xl shadow-lg">
+                <h2 class="text-2xl font-semibold text-slate-800 border-b border-slate-200 pb-4 mb-6">Post Details</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <div><label for="postName" class="block text-sm font-medium text-slate-600 mb-1">Name</label><input type="text" id="postName" value="Apmody" required class="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-sky-500 focus:border-sky-500 transition"></div>
+                    <div><label for="platform" class="block text-sm font-medium text-slate-600 mb-1">Platform</label><select id="platform" class="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-sky-500 focus:border-sky-500 transition"><option value="Blogger" selected>Blogger</option><option value="WordPress">WordPress</option></select></div>
+                    <div><label for="developer" class="block text-sm font-medium text-slate-600 mb-1">Developer</label><input type="text" id="developer" value="Arman Kumar" class="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-sky-500 focus:border-sky-500 transition"></div>
+                    <div><label for="releaseDate" class="block text-sm font-medium text-slate-600 mb-1">Release Date</label><input type="text" id="releaseDate" class="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-sky-500 focus:border-sky-500 transition"></div>
+                    <div><label for="lastUpdate" class="block text-sm font-medium text-slate-600 mb-1">Last Update</label><input type="text" id="lastUpdate" class="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-sky-500 focus:border-sky-500 transition"></div>
+                    <div><label for="version" class="block text-sm font-medium text-slate-600 mb-1">Version</label><input type="text" id="version" value="2.0" class="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-sky-500 focus:border-sky-500 transition"></div>
+                    <div><label for="views" class="block text-sm font-medium text-slate-600 mb-1">Views</label><input type="number" id="views" value="200" class="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-sky-500 focus:border-sky-500 transition"></div>
+                    <div><label for="downloads" class="block text-sm font-medium text-slate-600 mb-1">Downloads</label><input type="number" id="downloads" value="40" class="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-sky-500 focus:border-sky-500 transition"></div>
+                    <div><label for="format" class="block text-sm font-medium text-slate-600 mb-1">Format</label><select id="format" class="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-sky-500 focus:border-sky-500 transition"><option value="XML" selected>XML</option><option value="ZIP">ZIP</option></select></div>
+                    <div><label for="size" class="block text-sm font-medium text-slate-600 mb-1">Size</label><input type="text" id="size" value="121KB" class="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-sky-500 focus:border-sky-500 transition"></div>
+                    <div><label for="license" class="block text-sm font-medium text-slate-600 mb-1">License</label><select id="license" class="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-sky-500 focus:border-sky-500 transition"><option value="Personal Use" selected>Personal Use</option><option value="Commercial Use">Commercial Use</option></select></div>
+                    <div><label for="responsive" class="block text-sm font-medium text-slate-600 mb-1">Responsive</label><select id="responsive" class="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-sky-500 focus:border-sky-500 transition"><option value="Yes" selected>Yes</option><option value="No">No</option></select></div>
+                    <div><label for="darkMode" class="block text-sm font-medium text-slate-600 mb-1">Dark Mode</label><select id="darkMode" class="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-sky-500 focus:border-sky-500 transition"><option value="Supported" selected>Supported</option><option value="Not Supported">Not Supported</option></select></div>
+                    <div><label for="browsers" class="block text-sm font-medium text-slate-600 mb-1">Browsers</label><input type="text" id="browsers" value="Chrome, Firefox, Edge" class="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-sky-500 focus:border-sky-500 transition"></div>
+                    <div><label for="schemaMarkup" class="block text-sm font-medium text-slate-600 mb-1">Schema Markup</label><select id="schemaMarkup" class="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-sky-500 focus:border-sky-500 transition"><option value="Yes" selected>Yes</option><option value="No">No</option></select></div>
+                    <div><label for="languages" class="block text-sm font-medium text-slate-600 mb-1">Languages</label><input type="text" id="languages" value="English, Bangla" class="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-sky-500 focus:border-sky-500 transition"></div>
+                    <div><label for="colorOptions" class="block text-sm font-medium text-slate-600 mb-1">Color Options</label><input type="text" id="colorOptions" value="Multiple" class="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-sky-500 focus:border-sky-500 transition"></div>
+                    <div><label for="documentation" class="block text-sm font-medium text-slate-600 mb-1">Documentation</label><select id="documentation" class="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-sky-500 focus:border-sky-500 transition"><option value="Included" selected>Included</option><option value="Online">Online</option></select></div>
+                </div>
             </div>
 
-            <h2>Files & Links</h2>
-            <div class="grid">
-                <div><label for="mainImage" class="msrequired">Main Image</label><input type="file" id="mainImage" accept="image/*" required></div>
-                <div><label for="downloadFile" class="msrequired">Download File</label><input type="file" id="downloadFile" required></div>
-                <div><label for="previewUrl" class="msrequired">Preview URL</label><input type="url" id="previewUrl" placeholder="https://example.blogspot.com/" required></div>
-                <div style="grid-column: 1 / -1;"><label for="galleryImages">Gallery Images (Optional)</label><input type="file" id="galleryImages" accept="image/*" multiple></div>
+            <!-- Files & Links Section -->
+            <div class="bg-white p-6 md:p-8 rounded-2xl shadow-lg">
+                <h2 class="text-2xl font-semibold text-slate-800 border-b border-slate-200 pb-4 mb-6">Files & Links</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 items-start">
+                    <div><label for="mainImage" class="block text-sm font-medium text-slate-600 mb-1">Main Image</label><input type="file" id="mainImage" accept="image/*" required class="w-full text-sm text-slate-500 border border-slate-300 rounded-lg cursor-pointer"></div>
+                    <div><label for="downloadFile" class="block text-sm font-medium text-slate-600 mb-1">Download File</label><input type="file" id="downloadFile" required class="w-full text-sm text-slate-500 border border-slate-300 rounded-lg cursor-pointer"></div>
+                    <div><label for="previewUrl" class="block text-sm font-medium text-slate-600 mb-1">Preview URL</label><input type="url" id="previewUrl" placeholder="https://example.blogspot.com/" required class="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-sky-500 focus:border-sky-500 transition"></div>
+                </div>
             </div>
 
-            <h2>Post Content</h2>
-            <label for="postDescription">Description</label>
-            <textarea id="postDescription" rows="5">Are you looking for a <strong>high-performance, visually stunning, and SEO-optimized</strong> Blogger template that can <strong>boost your traffic, engagement, and revenue</strong>? Look no further! <strong>Apmody 2.0</strong> is here to transform your blog into a <strong>professional, fast-loading, and mobile-friendly</strong> website that ranks higher on Google and keeps visitors coming back for more.</textarea>
+            <!-- Gallery Images Section -->
+            <div class="bg-white p-6 md:p-8 rounded-2xl shadow-lg">
+                <h2 class="text-2xl font-semibold text-slate-800 border-b border-slate-200 pb-4 mb-6">Gallery Images <span class="text-sm font-normal text-slate-400">(Optional)</span></h2>
+                <input type="file" id="galleryImages" multiple accept="image/*" class="w-full text-sm text-slate-500 border border-slate-300 rounded-lg cursor-pointer">
+                <div id="galleryPreview" class="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 gap-4 mt-4"></div>
+            </div>
+
+            <!-- Post Content Section -->
+            <div class="bg-white p-6 md:p-8 rounded-2xl shadow-lg">
+                <h2 class="text-2xl font-semibold text-slate-800 border-b border-slate-200 pb-4 mb-6">Post Content</h2>
+                <label for="postDescription" class="block text-sm font-medium text-slate-600 mb-1">Description</label>
+                <textarea id="postDescription" rows="5" class="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-sky-500 focus:border-sky-500 transition">Are you looking for a <strong>high-performance, visually stunning, and SEO-optimized</strong> Blogger template that can <strong>boost your traffic, engagement, and revenue</strong>? Look no further! <strong>Apmody 2.0</strong> is here to transform your blog into a <strong>professional, fast-loading, and mobile-friendly</strong> website that ranks higher on Google and keeps visitors coming back for more.</textarea>
+            </div>
             
-            <input type="button" value="Generate Post HTML" onclick="generatePost()" id="generateBtn">
+            <!-- Generate Button -->
+            <button type="button" onclick="generatePost()" id="generateBtn" class="w-full bg-sky-600 text-white font-bold py-3 px-6 rounded-lg hover:bg-sky-700 transition-all duration-300 disabled:bg-slate-400 disabled:cursor-not-allowed flex items-center justify-center space-x-3 shadow-lg shadow-sky-500/20 hover:shadow-xl hover:shadow-sky-500/30">
+                <svg id="spinner" class="animate-spin -ml-1 mr-3 h-5 w-5 text-white hidden" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>
+                <span id="btn-text">Generate Post HTML</span>
+            </button>
         </form>
 
-        <div id="outputContainer">
-            <h2>Generated HTML</h2>
-            <pre id="generatedHtmlWrapper"><code id="generatedHtml">Generated HTML will appear here...</code></pre>
+        <!-- Output Section -->
+        <div id="outputContainer" class="bg-slate-800 text-slate-200 p-6 md:p-8 rounded-2xl shadow-lg mt-10">
+            <h2 class="text-2xl font-semibold text-white border-b border-slate-600 pb-4 mb-6">Generated HTML</h2>
+            <pre class="bg-slate-900/50 p-4 rounded-lg overflow-x-auto"><code id="generatedHtml" class="text-sm">Generated HTML will appear here...</code></pre>
         </div>
     </div>
 
@@ -82,6 +90,25 @@
             const today = new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: '2-digit' });
             document.getElementById('releaseDate').value = today;
             document.getElementById('lastUpdate').value = today;
+            
+            const galleryInput = document.getElementById('galleryImages');
+            const previewContainer = document.getElementById('galleryPreview');
+
+            galleryInput.addEventListener('change', () => {
+                previewContainer.innerHTML = '';
+                if(galleryInput.files.length > 0) {
+                    for (const file of galleryInput.files) {
+                        const reader = new FileReader();
+                        reader.onload = e => {
+                            const img = document.createElement('img');
+                            img.src = e.target.result;
+                            img.className = "w-full h-24 object-cover rounded-lg shadow-md";
+                            previewContainer.appendChild(img);
+                        };
+                        reader.readAsDataURL(file);
+                    }
+                }
+            });
         });
 
         async function uploadToGitHub(file, path) {
@@ -105,61 +132,57 @@
                 throw new Error(errorData.message || 'File upload failed.');
             }
             
-            return `/${path}/${newFileName}`;
+            const siteDomain = "https://themestash.netlify.app";
+            return `${siteDomain}/${path}/${newFileName}`;
         }
 
         async function generatePost() {
-            const mainImageFile = document.getElementById('mainImage').files[0];
-            const downloadFile = document.getElementById('downloadFile').files[0];
-            // NEW: Get gallery files
-            const galleryFiles = document.getElementById('galleryImages').files;
-
-            if (!mainImageFile || !downloadFile) {
-                alert("Please select both a Main Image and a Download File.");
+            if (!document.getElementById('mainImage').files.length || !document.getElementById('downloadFile').files.length) {
+                alert("Please select a Main Image and a Download File.");
                 return;
             }
-            
+
             const generateButton = document.getElementById('generateBtn');
+            const buttonText = document.getElementById('btn-text');
+            const spinner = document.getElementById('spinner');
             
             try {
-                generateButton.value = "Uploading Files... Please Wait...";
+                spinner.classList.remove('hidden');
+                buttonText.textContent = 'Uploading...';
                 generateButton.disabled = true;
 
-                // Upload required files
-                const imagePath = await uploadToGitHub(mainImageFile, 'Assets/Image');
-                const downloadPath = await uploadToGitHub(downloadFile, 'Assets/Theme');
+                const mainImagePromise = uploadToGitHub(document.getElementById('mainImage').files[0], 'Assets/Image');
+                const downloadPromise = uploadToGitHub(document.getElementById('downloadFile').files[0], 'Assets/Theme');
                 
-                // NEW: Handle gallery image uploads
-                let galleryImagePaths = [];
-                if (galleryFiles.length > 0) {
-                    // Create an array of upload promises
-                    const uploadPromises = Array.from(galleryFiles).map(file => uploadToGitHub(file, 'Assets/Image'));
-                    // Wait for all uploads to complete
-                    galleryImagePaths = await Promise.all(uploadPromises);
-                }
-                
-                generateButton.value = "Generating HTML...";
-                
-                const siteDomain = "https://themestash.netlify.app";
-                
-                const finalImageUrl = siteDomain + imagePath;
-                const finalDownloadUrl = siteDomain + downloadPath;
+                const [imageUrl, downloadUrl] = await Promise.all([mainImagePromise, downloadPromise]);
 
+                const galleryFiles = document.getElementById('galleryImages').files;
+                let galleryHtml = '';
+                if (galleryFiles.length > 0) {
+                    let uploadedCount = 0;
+                    let galleryImageUrls = [];
+                    for (const file of galleryFiles) {
+                        buttonText.textContent = `Uploading Gallery (${++uploadedCount}/${galleryFiles.length})...`;
+                        const url = await uploadToGitHub(file, 'Assets/Image/Gallery');
+                        galleryImageUrls.push(url);
+                    }
+                    
+                    if (galleryImageUrls.length > 0) {
+                         const galleryImagesHtml = galleryImageUrls.map(url => `  <img alt='image_alt' src='${url}'/>`).join('\n');
+                         galleryHtml = `\n<!--[ Images with Scroll Layout (Style 1) ]-->\n<div class='glImg'>\n${galleryImagesHtml}\n</div>`;
+                    }
+                }
+
+                buttonText.textContent = 'Generating HTML...';
+                
                 const postData = {};
-                const fields = [
-                    "postName", "platform", "developer", "releaseDate", "lastUpdate", 
-                    "version", "views", "downloads", "format", "size", "license", 
-                    "responsive", "darkMode", "browsers", "schemaMarkup", "languages", 
-                    "colorOptions", "documentation", "postDescription", "previewUrl"
-                ];
-                fields.forEach(id => {
-                    postData[id] = document.getElementById(id).value;
-                });
+                const fields = ["postName", "platform", "developer", "releaseDate", "lastUpdate", "version", "views", "downloads", "format", "size", "license", "responsive", "darkMode", "browsers", "schemaMarkup", "languages", "colorOptions", "documentation", "postDescription", "previewUrl"];
+                fields.forEach(id => { postData[id] = document.getElementById(id).value; });
                 
                 const finalPreviewLink = `https://cdnix.pages.dev/preview/?u=${btoa(postData.previewUrl)}`;
 
-                let htmlOutput = `<img alt='${postData.postName} Template' src='${finalImageUrl}'/>
-
+                // --- UPDATED HTML TEMPLATE ---
+                const mainHtml = `<img alt='${postData.postName} Template' src='${imageUrl}'/>
 <div class="pST">
     <div><div><i class="hgi-stroke hgi-file-01"></i></div><div><span>Name</span><span>${postData.postName}</span></div></div>
     <div><div><i class="hgi-stroke hgi-database"></i></div><div><span>Platform</span><span>${postData.platform}</span></div></div>
@@ -181,37 +204,26 @@
     <div><div><i class="hgi-stroke hgi-book-open-02"></i></div><div><span>Documentation</span><span>${postData.documentation}</span></div></div>
 </div>
 <p>${postData.postDescription}</p>
-
 <div class="button-grid">
-    <a class="button safeL" href="${finalDownloadUrl}"><i class="icon dl"></i>Download</a>
+    <a class="button safeL" href="${downloadUrl}"><i class="icon dl"></i>Download</a>
     <a class="button" href="${finalPreviewLink}" target="_blank"><i class="icon eye"></i>Preview</a>
-</div>
-<p><strong>Stay Updated!</strong><br>
-Follow <strong><a href="https://themes.merazalvee.com" target="_blank">ThemeStash</a></strong> for more <strong>free Blogger templates, SEO tips, and blogging guides</strong>.</p>`;
-
-                // NEW: Generate the gallery HTML if images were uploaded
-                if (galleryImagePaths.length > 0) {
-                    const galleryImagesHtml = galleryImagePaths.map(imagePath => {
-                        const fullUrl = siteDomain + imagePath;
-                        return `<img alt='${postData.postName} Gallery Image' src='${fullUrl}'/>`;
-                    }).join('\n  ');
-
-                    const galleryHtml = `\n\n<div class='glImg'>
-  ${galleryImagesHtml}
 </div>`;
-                    
-                    // NEW: Append gallery HTML to the final output
-                    htmlOutput += galleryHtml;
-                }
 
-                document.getElementById('generatedHtml').textContent = htmlOutput.trim();
+                const footerHtml = `\n<p><strong>Stay Updated!</strong><br>
+Follow <strong><a href="https://themes.merazalvee.com" target="_blank">ThemeStash</a></strong> for more <strong>free Blogger templates, SEO tips, and blogging guides</strong>.</p>`;
+                
+                const finalHtmlOutput = mainHtml + galleryHtml + footerHtml;
+                // --- END OF UPDATED TEMPLATE ---
+
+                document.getElementById('generatedHtml').textContent = finalHtmlOutput.trim();
                 alert("Post HTML Generated Successfully!");
 
             } catch (error) {
                 alert(`An error occurred: ${error.message}`);
                 console.error(error);
             } finally {
-                generateButton.value = "Generate Post HTML";
+                spinner.classList.add('hidden');
+                buttonText.textContent = 'Generate Post HTML';
                 generateButton.disabled = false;
             }
         }
