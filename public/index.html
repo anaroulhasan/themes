@@ -184,7 +184,7 @@
                     
                     if (galleryImageUrls.length > 0) {
                          const galleryImagesHtml = galleryImageUrls.map(url => `  <img alt='${postData.postName}' src='${url}'/>`).join('\n');
-                         galleryHtml = `\n\n\n<div class='glImg'>\n${galleryImagesHtml}\n</div>`;
+                         galleryHtml = `\n\n\n<div class='galWrp'>\n${galleryImagesHtml}\n</div>`;
                     }
                 }
 
@@ -213,8 +213,8 @@
 </div>
 <div>${postData.postDescription}</div>
 <div class="button-grid">
-    <a class="button safeL" href="${downloadUrl}"><i class="icon dl"></i>Download</a>
-    <a class="button" href="${finalPreviewLink}" target="_blank"><i class="icon eye"></i>Preview</a>
+    <a class="justify-center button" href="${downloadUrl}"><i class="icon dl"></i>Download</a>
+    <a class="justify-center button" href="${finalPreviewLink}" target="_blank"><i class="icon demo"></i>Preview</a>
 </div>`;
 
                 const footerHtml = `\n<p><strong>Stay Updated!</strong><br>
