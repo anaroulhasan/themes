@@ -1,0 +1,14 @@
+{
+  "name": "theme-uploader-project",
+  "version": "1.0.0",
+  "description": "Netlify function to upload files to a GitHub repository.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@octokit/rest": "^20.0.0"
+  }
+}
