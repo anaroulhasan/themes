@@ -166,8 +166,8 @@
                 const fields = ["postName", "platform", "developer", "releaseDate", "lastUpdate", "version", "format", "size", "license", "responsive", "darkMode", "browsers", "schemaMarkup", "languages", "colorOptions", "documentation", "postDescription", "previewUrl"];
                 fields.forEach(id => { postData[id] = document.getElementById(id).value; });
 
-                const mainImagePromise = uploadToGitHub(document.getElementById('mainImage').files[0], 'Assets/Image');
-                const downloadPromise = uploadToGitHub(document.getElementById('downloadFile').files[0], 'Assets/Theme');
+                const mainImagePromise = uploadToGitHub(document.getElementById('mainImage').files[0], 'assets/image');
+                const downloadPromise = uploadToGitHub(document.getElementById('downloadFile').files[0], 'assets/theme');
                 
                 const [imageUrl, downloadUrl] = await Promise.all([mainImagePromise, downloadPromise]);
 
@@ -178,7 +178,7 @@
                     let galleryImageUrls = [];
                     for (const file of galleryFiles) {
                         buttonText.textContent = `Uploading Gallery (${++uploadedCount}/${galleryFiles.length})...`;
-                        const url = await uploadToGitHub(file, 'Assets/Image/Gallery');
+                        const url = await uploadToGitHub(file, 'assets/image/gallery');
                         galleryImageUrls.push(url);
                     }
                     
