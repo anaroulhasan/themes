@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ThemeStash Post Generator (Domain Update)</title>
+    <title>ThemeStash Post Generator (with Gallery)</title>
     <style>
         :root { --contentL: #ddd; --linkC: #007bff; --bg: #f9f9f9; --textC: #333; }
         body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; background-color: var(--bg); color: var(--textC); padding: 20px; line-height: 1.6; }
@@ -36,7 +36,7 @@
         <form id="postForm" class="ms-form">
             <h2>Post Details</h2>
             <div class="grid">
-                <div><label for="postName" class="msrequired">Name</label><input type="text" id="postName" value="Apmody" required></div>
+                 <div><label for="postName" class="msrequired">Name</label><input type="text" id="postName" value="Apmody" required></div>
                 <div><label for="platform">Platform</label><select id="platform"><option value="Blogger" selected>Blogger</option><option value="WordPress">WordPress</option></select></div>
                 <div><label for="developer">Developer</label><input type="text" id="developer" value="Arman Kumar"></div>
                 <div><label for="releaseDate">Release Date</label><input type="text" id="releaseDate"></div>
@@ -58,9 +58,10 @@
 
             <h2>Files & Links</h2>
             <div class="grid">
-                <div><label for="mainImage" class="msrequired">Main Image</label><input type="file" id="mainImage" class="msinput" accept="image/*" required></div>
-                <div><label for="downloadFile" class="msrequired">Download File (.xml, .zip)</label><input type="file" id="downloadFile" class="msinput" required></div>
+                <div><label for="mainImage" class="msrequired">Main Image</label><input type="file" id="mainImage" accept="image/*" required></div>
+                <div><label for="downloadFile" class="msrequired">Download File</label><input type="file" id="downloadFile" required></div>
                 <div><label for="previewUrl" class="msrequired">Preview URL</label><input type="url" id="previewUrl" placeholder="https://example.blogspot.com/" required></div>
+                <div style="grid-column: 1 / -1;"><label for="galleryImages">Gallery Images (Optional)</label><input type="file" id="galleryImages" accept="image/*" multiple></div>
             </div>
 
             <h2>Post Content</h2>
@@ -83,7 +84,6 @@
             document.getElementById('lastUpdate').value = today;
         });
 
-        // UPDATED: This function now returns the relative path instead of the full GitHub URL.
         async function uploadToGitHub(file, path) {
             const reader = new FileReader();
             const fileContent = await new Promise((resolve, reject) => {
@@ -105,16 +105,17 @@
                 throw new Error(errorData.message || 'File upload failed.');
             }
             
-            // Return the relative path for use with your domain
             return `/${path}/${newFileName}`;
         }
 
-        // UPDATED: This function now constructs URLs using your domain.
         async function generatePost() {
             const mainImageFile = document.getElementById('mainImage').files[0];
             const downloadFile = document.getElementById('downloadFile').files[0];
+            // NEW: Get gallery files
+            const galleryFiles = document.getElementById('galleryImages').files;
+
             if (!mainImageFile || !downloadFile) {
-                alert("Please select both an image and a theme file.");
+                alert("Please select both a Main Image and a Download File.");
                 return;
             }
             
@@ -124,16 +125,23 @@
                 generateButton.value = "Uploading Files... Please Wait...";
                 generateButton.disabled = true;
 
-                // Get relative paths from the upload function
+                // Upload required files
                 const imagePath = await uploadToGitHub(mainImageFile, 'Assets/Image');
                 const downloadPath = await uploadToGitHub(downloadFile, 'Assets/Theme');
                 
+                // NEW: Handle gallery image uploads
+                let galleryImagePaths = [];
+                if (galleryFiles.length > 0) {
+                    // Create an array of upload promises
+                    const uploadPromises = Array.from(galleryFiles).map(file => uploadToGitHub(file, 'Assets/Image'));
+                    // Wait for all uploads to complete
+                    galleryImagePaths = await Promise.all(uploadPromises);
+                }
+                
                 generateButton.value = "Generating HTML...";
                 
-                // Define your domain here
                 const siteDomain = "https://themestash.netlify.app";
                 
-                // Create the full URLs using your domain
                 const finalImageUrl = siteDomain + imagePath;
                 const finalDownloadUrl = siteDomain + downloadPath;
 
@@ -150,7 +158,7 @@
                 
                 const finalPreviewLink = `https://cdnix.pages.dev/preview/?u=${btoa(postData.previewUrl)}`;
 
-                const htmlOutput = `<img alt='${postData.postName} Template' src='${finalImageUrl}'/>
+                let htmlOutput = `<img alt='${postData.postName} Template' src='${finalImageUrl}'/>
 
 <div class="pST">
     <div><div><i class="hgi-stroke hgi-file-01"></i></div><div><span>Name</span><span>${postData.postName}</span></div></div>
@@ -180,6 +188,21 @@
 </div>
 <p><strong>Stay Updated!</strong><br>
 Follow <strong><a href="https://themes.merazalvee.com" target="_blank">ThemeStash</a></strong> for more <strong>free Blogger templates, SEO tips, and blogging guides</strong>.</p>`;
+
+                // NEW: Generate the gallery HTML if images were uploaded
+                if (galleryImagePaths.length > 0) {
+                    const galleryImagesHtml = galleryImagePaths.map(imagePath => {
+                        const fullUrl = siteDomain + imagePath;
+                        return `<img alt='${postData.postName} Gallery Image' src='${fullUrl}'/>`;
+                    }).join('\n  ');
+
+                    const galleryHtml = `\n\n<div class='glImg'>
+  ${galleryImagesHtml}
+</div>`;
+                    
+                    // NEW: Append gallery HTML to the final output
+                    htmlOutput += galleryHtml;
+                }
 
                 document.getElementById('generatedHtml').textContent = htmlOutput.trim();
                 alert("Post HTML Generated Successfully!");
