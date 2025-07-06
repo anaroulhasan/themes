@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en" class="dark"> 
+<html lang="en" class="dark">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ThemeStash Post Generator [Dark Mode]</title>
+    <title>ThemeStash Post Generator [Full-Width]</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         /* Custom styles for dark mode and file input */
@@ -13,7 +13,6 @@
             --card-bg: #ffffff;
             --border: #e2e8f0; /* slate-200 */
             --muted-fg: #64748b; /* slate-500 */
-            --primary: #0ea5e9; /* sky-500 */
         }
         html.dark {
             --bg: #0f172a; /* slate-900 */
@@ -31,88 +30,84 @@
         }
     </style>
 </head>
-<body class="font-sans">
+<body class="font-sans p-4 sm:p-6 md:p-8">
 
-    <div class="max-w-4xl mx-auto p-4 md:p-8">
-        <header class="text-center mb-10">
-            <h1 class="text-3xl md:text-4xl font-bold text-sky-500">ThemeStash Post Generator</h1>
-            <p class="text-slate-400 mt-2">Create your blog posts with ease and style.</p>
-            </header>
+    <header class="text-center mb-10">
+        <h1 class="text-3xl md:text-4xl font-bold text-sky-500">ThemeStash Post Generator</h1>
+        <p class="text-slate-400 mt-2">Create your blog posts with ease and style.</p>
+    </header>
 
-        <form id="postForm" class="space-y-8">
-            <div class="bg-[var(--card-bg)] p-6 md:p-8 rounded-2xl shadow-lg">
-                <h2 class="text-2xl font-semibold text-[var(--fg)] border-b border-[var(--border)] pb-4 mb-6">Post Details</h2>
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                    <div><label for="postName" class="block text-sm font-medium text-[var(--muted-fg)] mb-1">Name</label><input type="text" id="postName" value="Apmody" required class="w-full px-4 py-2 bg-[var(--bg)] border border-[var(--border)] rounded-lg focus:ring-2 focus:ring-sky-500 focus:border-sky-500 transition"></div>
-                    <div><label for="platform" class="block text-sm font-medium text-[var(--muted-fg)] mb-1">Platform</label><select id="platform" class="w-full px-4 py-2 bg-[var(--bg)] border border-[var(--border)] rounded-lg focus:ring-2 focus:ring-sky-500 focus:border-sky-500 transition"><option value="Blogger" selected>Blogger</option><option value="WordPress">WordPress</option></select></div>
-                    <div><label for="developer" class="block text-sm font-medium text-[var(--muted-fg)] mb-1">Developer</label><input type="text" id="developer" value="Arman Kumar" class="w-full px-4 py-2 bg-[var(--bg)] border border-[var(--border)] rounded-lg focus:ring-2 focus:ring-sky-500 focus:border-sky-500 transition"></div>
-                    <div><label for="releaseDate" class="block text-sm font-medium text-[var(--muted-fg)] mb-1">Release Date</label><input type="text" id="releaseDate" class="w-full px-4 py-2 bg-[var(--bg)] border border-[var(--border)] rounded-lg focus:ring-2 focus:ring-sky-500 focus:border-sky-500 transition"></div>
-                    <div><label for="lastUpdate" class="block text-sm font-medium text-[var(--muted-fg)] mb-1">Last Update</label><input type="text" id="lastUpdate" class="w-full px-4 py-2 bg-[var(--bg)] border border-[var(--border)] rounded-lg focus:ring-2 focus:ring-sky-500 focus:border-sky-500 transition"></div>
-                    <div><label for="version" class="block text-sm font-medium text-[var(--muted-fg)] mb-1">Version</label><input type="text" id="version" value="2.0" class="w-full px-4 py-2 bg-[var(--bg)] border border-[var(--border)] rounded-lg focus:ring-2 focus:ring-sky-500 focus:border-sky-500 transition"></div>
-                    <div><label for="views" class="block text-sm font-medium text-[var(--muted-fg)] mb-1">Views</label><input type="number" id="views" value="200" class="w-full px-4 py-2 bg-[var(--bg)] border border-[var(--border)] rounded-lg focus:ring-2 focus:ring-sky-500 focus:border-sky-500 transition"></div>
-                    <div><label for="downloads" class="block text-sm font-medium text-[var(--muted-fg)] mb-1">Downloads</label><input type="number" id="downloads" value="40" class="w-full px-4 py-2 bg-[var(--bg)] border border-[var(--border)] rounded-lg focus:ring-2 focus:ring-sky-500 focus:border-sky-500 transition"></div>
-                    <div><label for="format" class="block text-sm font-medium text-[var(--muted-fg)] mb-1">Format</label><select id="format" class="w-full px-4 py-2 bg-[var(--bg)] border border-[var(--border)] rounded-lg focus:ring-2 focus:ring-sky-500 focus:border-sky-500 transition"><option value="XML" selected>XML</option><option value="ZIP">ZIP</option></select></div>
-                    <div><label for="size" class="block text-sm font-medium text-[var(--muted-fg)] mb-1">Size</label><input type="text" id="size" value="121KB" class="w-full px-4 py-2 bg-[var(--bg)] border border-[var(--border)] rounded-lg focus:ring-2 focus:ring-sky-500 focus:border-sky-500 transition"></div>
-                    <div><label for="license" class="block text-sm font-medium text-[var(--muted-fg)] mb-1">License</label><select id="license" class="w-full px-4 py-2 bg-[var(--bg)] border border-[var(--border)] rounded-lg focus:ring-2 focus:ring-sky-500 focus:border-sky-500 transition"><option value="Personal Use" selected>Personal Use</option><option value="Commercial Use">Commercial Use</option></select></div>
-                    <div><label for="responsive" class="block text-sm font-medium text-[var(--muted-fg)] mb-1">Responsive</label><select id="responsive" class="w-full px-4 py-2 bg-[var(--bg)] border border-[var(--border)] rounded-lg focus:ring-2 focus:ring-sky-500 focus:border-sky-500 transition"><option value="Yes" selected>Yes</option><option value="No">No</option></select></div>
-                    <div><label for="darkMode" class="block text-sm font-medium text-[var(--muted-fg)] mb-1">Dark Mode</label><select id="darkMode" class="w-full px-4 py-2 bg-[var(--bg)] border border-[var(--border)] rounded-lg focus:ring-2 focus:ring-sky-500 focus:border-sky-500 transition"><option value="Supported" selected>Supported</option><option value="Not Supported">Not Supported</option></select></div>
-                    <div><label for="browsers" class="block text-sm font-medium text-[var(--muted-fg)] mb-1">Browsers</label><input type="text" id="browsers" value="Chrome, Firefox, Edge" class="w-full px-4 py-2 bg-[var(--bg)] border border-[var(--border)] rounded-lg focus:ring-2 focus:ring-sky-500 focus:border-sky-500 transition"></div>
-                    <div><label for="schemaMarkup" class="block text-sm font-medium text-[var(--muted-fg)] mb-1">Schema Markup</label><select id="schemaMarkup" class="w-full px-4 py-2 bg-[var(--bg)] border border-[var(--border)] rounded-lg focus:ring-2 focus:ring-sky-500 focus:border-sky-500 transition"><option value="Yes" selected>Yes</option><option value="No">No</option></select></div>
-                    <div><label for="languages" class="block text-sm font-medium text-[var(--muted-fg)] mb-1">Languages</label><input type="text" id="languages" value="English, Bangla" class="w-full px-4 py-2 bg-[var(--bg)] border border-[var(--border)] rounded-lg focus:ring-2 focus:ring-sky-500 focus:border-sky-500 transition"></div>
-                    <div><label for="colorOptions" class="block text-sm font-medium text-[var(--muted-fg)] mb-1">Color Options</label><input type="text" id="colorOptions" value="Multiple" class="w-full px-4 py-2 bg-[var(--bg)] border border-[var(--border)] rounded-lg focus:ring-2 focus:ring-sky-500 focus:border-sky-500 transition"></div>
-                    <div><label for="documentation" class="block text-sm font-medium text-[var(--muted-fg)] mb-1">Documentation</label><select id="documentation" class="w-full px-4 py-2 bg-[var(--bg)] border border-[var(--border)] rounded-lg focus:ring-2 focus:ring-sky-500 focus:border-sky-500 transition"><option value="Included" selected>Included</option><option value="Online">Online</option></select></div>
-                </div>
+    <form id="postForm" class="space-y-8 max-w-6xl mx-auto"> <div class="bg-[var(--card-bg)] p-6 md:p-8 rounded-2xl shadow-lg">
+            <h2 class="text-2xl font-semibold text-[var(--fg)] border-b border-[var(--border)] pb-4 mb-6">Post Details</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div><label for="postName" class="block text-sm font-medium text-[var(--muted-fg)] mb-1">Name</label><input type="text" id="postName" value="Apmody" required class="w-full px-4 py-2 bg-[var(--bg)] border border-[var(--border)] rounded-lg focus:ring-2 focus:ring-sky-500 focus:border-sky-500 transition"></div>
+                <div><label for="platform" class="block text-sm font-medium text-[var(--muted-fg)] mb-1">Platform</label><select id="platform" class="w-full px-4 py-2 bg-[var(--bg)] border border-[var(--border)] rounded-lg focus:ring-2 focus:ring-sky-500 focus:border-sky-500 transition"><option value="Blogger" selected>Blogger</option><option value="WordPress">WordPress</option></select></div>
+                <div><label for="developer" class="block text-sm font-medium text-[var(--muted-fg)] mb-1">Developer</label><input type="text" id="developer" value="Arman Kumar" class="w-full px-4 py-2 bg-[var(--bg)] border border-[var(--border)] rounded-lg focus:ring-2 focus:ring-sky-500 focus:border-sky-500 transition"></div>
+                <div><label for="releaseDate" class="block text-sm font-medium text-[var(--muted-fg)] mb-1">Release Date</label><input type="text" id="releaseDate" class="w-full px-4 py-2 bg-[var(--bg)] border border-[var(--border)] rounded-lg focus:ring-2 focus:ring-sky-500 focus:border-sky-500 transition"></div>
+                <div><label for="lastUpdate" class="block text-sm font-medium text-[var(--muted-fg)] mb-1">Last Update</label><input type="text" id="lastUpdate" class="w-full px-4 py-2 bg-[var(--bg)] border border-[var(--border)] rounded-lg focus:ring-2 focus:ring-sky-500 focus:border-sky-500 transition"></div>
+                <div><label for="version" class="block text-sm font-medium text-[var(--muted-fg)] mb-1">Version</label><input type="text" id="version" value="2.0" class="w-full px-4 py-2 bg-[var(--bg)] border border-[var(--border)] rounded-lg focus:ring-2 focus:ring-sky-500 focus:border-sky-500 transition"></div>
+                <div><label for="views" class="block text-sm font-medium text-[var(--muted-fg)] mb-1">Views</label><input type="number" id="views" value="200" class="w-full px-4 py-2 bg-[var(--bg)] border border-[var(--border)] rounded-lg focus:ring-2 focus:ring-sky-500 focus:border-sky-500 transition"></div>
+                <div><label for="downloads" class="block text-sm font-medium text-[var(--muted-fg)] mb-1">Downloads</label><input type="number" id="downloads" value="40" class="w-full px-4 py-2 bg-[var(--bg)] border border-[var(--border)] rounded-lg focus:ring-2 focus:ring-sky-500 focus:border-sky-500 transition"></div>
+                <div><label for="format" class="block text-sm font-medium text-[var(--muted-fg)] mb-1">Format</label><select id="format" class="w-full px-4 py-2 bg-[var(--bg)] border border-[var(--border)] rounded-lg focus:ring-2 focus:ring-sky-500 focus:border-sky-500 transition"><option value="XML" selected>XML</option><option value="ZIP">ZIP</option></select></div>
+                <div><label for="size" class="block text-sm font-medium text-[var(--muted-fg)] mb-1">Size</label><input type="text" id="size" value="121KB" class="w-full px-4 py-2 bg-[var(--bg)] border border-[var(--border)] rounded-lg focus:ring-2 focus:ring-sky-500 focus:border-sky-500 transition"></div>
+                <div><label for="license" class="block text-sm font-medium text-[var(--muted-fg)] mb-1">License</label><select id="license" class="w-full px-4 py-2 bg-[var(--bg)] border border-[var(--border)] rounded-lg focus:ring-2 focus:ring-sky-500 focus:border-sky-500 transition"><option value="Personal Use" selected>Personal Use</option><option value="Commercial Use">Commercial Use</option></select></div>
+                <div><label for="responsive" class="block text-sm font-medium text-[var(--muted-fg)] mb-1">Responsive</label><select id="responsive" class="w-full px-4 py-2 bg-[var(--bg)] border border-[var(--border)] rounded-lg focus:ring-2 focus:ring-sky-500 focus:border-sky-500 transition"><option value="Yes" selected>Yes</option><option value="No">No</option></select></div>
+                <div><label for="darkMode" class="block text-sm font-medium text-[var(--muted-fg)] mb-1">Dark Mode</label><select id="darkMode" class="w-full px-4 py-2 bg-[var(--bg)] border border-[var(--border)] rounded-lg focus:ring-2 focus:ring-sky-500 focus:border-sky-500 transition"><option value="Supported" selected>Supported</option><option value="Not Supported">Not Supported</option></select></div>
+                <div><label for="browsers" class="block text-sm font-medium text-[var(--muted-fg)] mb-1">Browsers</label><input type="text" id="browsers" value="Chrome, Firefox, Edge" class="w-full px-4 py-2 bg-[var(--bg)] border border-[var(--border)] rounded-lg focus:ring-2 focus:ring-sky-500 focus:border-sky-500 transition"></div>
+                <div><label for="schemaMarkup" class="block text-sm font-medium text-[var(--muted-fg)] mb-1">Schema Markup</label><select id="schemaMarkup" class="w-full px-4 py-2 bg-[var(--bg)] border border-[var(--border)] rounded-lg focus:ring-2 focus:ring-sky-500 focus:border-sky-500 transition"><option value="Yes" selected>Yes</option><option value="No">No</option></select></div>
+                <div><label for="languages" class="block text-sm font-medium text-[var(--muted-fg)] mb-1">Languages</label><input type="text" id="languages" value="English, Bangla" class="w-full px-4 py-2 bg-[var(--bg)] border border-[var(--border)] rounded-lg focus:ring-2 focus:ring-sky-500 focus:border-sky-500 transition"></div>
+                <div><label for="colorOptions" class="block text-sm font-medium text-[var(--muted-fg)] mb-1">Color Options</label><input type="text" id="colorOptions" value="Multiple" class="w-full px-4 py-2 bg-[var(--bg)] border border-[var(--border)] rounded-lg focus:ring-2 focus:ring-sky-500 focus:border-sky-500 transition"></div>
+                <div><label for="documentation" class="block text-sm font-medium text-[var(--muted-fg)] mb-1">Documentation</label><select id="documentation" class="w-full px-4 py-2 bg-[var(--bg)] border border-[var(--border)] rounded-lg focus:ring-2 focus:ring-sky-500 focus:border-sky-500 transition"><option value="Included" selected>Included</option><option value="Online">Online</option></select></div>
             </div>
-            
-            <div class="bg-[var(--card-bg)] p-6 md:p-8 rounded-2xl shadow-lg">
-                <h2 class="text-2xl font-semibold text-[var(--fg)] border-b border-[var(--border)] pb-4 mb-6">Files & Links</h2>
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 items-start">
-                    <div><label for="mainImage" class="block text-sm font-medium text-[var(--muted-fg)] mb-1">Main Image</label><input type="file" id="mainImage" accept="image/*" required class="w-full text-sm text-slate-500 border border-[var(--border)] rounded-lg cursor-pointer"></div>
-                    <div><label for="downloadFile" class="block text-sm font-medium text-[var(--muted-fg)] mb-1">Download File</label><input type="file" id="downloadFile" required class="w-full text-sm text-slate-500 border border-[var(--border)] rounded-lg cursor-pointer"></div>
-                    <div><label for="previewUrl" class="block text-sm font-medium text-[var(--muted-fg)] mb-1">Preview URL</label><input type="url" id="previewUrl" placeholder="https://example.blogspot.com/" required class="w-full px-4 py-2 bg-[var(--bg)] border border-[var(--border)] rounded-lg focus:ring-2 focus:ring-sky-500 focus:border-sky-500 transition"></div>
-                </div>
-            </div>
-
-            <div class="bg-[var(--card-bg)] p-6 md:p-8 rounded-2xl shadow-lg">
-                <h2 class="text-2xl font-semibold text-[var(--fg)] border-b border-[var(--border)] pb-4 mb-6">Gallery Images <span class="text-sm font-normal text-slate-400">(Optional)</span></h2>
-                <input type="file" id="galleryImages" multiple accept="image/*" class="w-full text-sm text-slate-500 border border-[var(--border)] rounded-lg cursor-pointer">
-                <div id="galleryPreview" class="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 gap-4 mt-4"></div>
-            </div>
-
-            <div class="bg-[var(--card-bg)] p-6 md:p-8 rounded-2xl shadow-lg">
-                <h2 class="text-2xl font-semibold text-[var(--fg)] border-b border-[var(--border)] pb-4 mb-6">Post Content</h2>
-                <label for="postDescription" class="block text-sm font-medium text-[var(--muted-fg)] mb-1">Description</label>
-                <textarea id="postDescription" rows="5" class="w-full px-4 py-2 bg-[var(--bg)] border border-[var(--border)] rounded-lg focus:ring-2 focus:ring-sky-500 focus:border-sky-500 transition">Are you looking for a <strong>high-performance, visually stunning, and SEO-optimized</strong> Blogger template that can <strong>boost your traffic, engagement, and revenue</strong>? Look no further! <strong>Apmody 2.0</strong> is here to transform your blog into a <strong>professional, fast-loading, and mobile-friendly</strong> website that ranks higher on Google and keeps visitors coming back for more.</textarea>
-            </div>
-            
-            <button type="button" onclick="generatePost()" id="generateBtn" class="w-full bg-sky-600 text-white font-bold py-3 px-6 rounded-lg hover:bg-sky-700 transition-all duration-300 disabled:bg-slate-400 disabled:cursor-not-allowed flex items-center justify-center space-x-3 shadow-lg shadow-sky-500/20 hover:shadow-xl hover:shadow-sky-500/30">
-                <svg id="spinner" class="animate-spin -ml-1 mr-3 h-5 w-5 text-white hidden" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>
-                <span id="btn-text">Generate Post HTML</span>
-            </button>
-        </form>
-
-        <div class="bg-[var(--card-bg)] p-6 md:p-8 rounded-2xl shadow-lg mt-10">
-            <div class="flex justify-between items-center border-b border-[var(--border)] pb-4 mb-6">
-                <h2 class="text-2xl font-semibold text-[var(--fg)]">Generated HTML</h2>
-                <button id="copyBtn" class="bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-300 font-semibold text-sm px-4 py-2 rounded-lg hover:bg-slate-300 dark:hover:bg-slate-600 transition-colors flex items-center space-x-2">
-                    <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"></path></svg>
-                    <span>Copy</span>
-                </button>
-            </div>
-            <pre class="bg-[var(--bg)] p-4 rounded-lg overflow-x-auto"><code id="generatedHtml" class="text-sm">Generated HTML will appear here...</code></pre>
         </div>
+
+        <div class="bg-[var(--card-bg)] p-6 md:p-8 rounded-2xl shadow-lg">
+            <h2 class="text-2xl font-semibold text-[var(--fg)] border-b border-[var(--border)] pb-4 mb-6">Files & Links</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 items-start">
+                <div><label for="mainImage" class="block text-sm font-medium text-[var(--muted-fg)] mb-1">Main Image</label><input type="file" id="mainImage" accept="image/*" required class="w-full text-sm text-slate-500 border border-[var(--border)] rounded-lg cursor-pointer"></div>
+                <div><label for="downloadFile" class="block text-sm font-medium text-[var(--muted-fg)] mb-1">Download File</label><input type="file" id="downloadFile" required class="w-full text-sm text-slate-500 border border-[var(--border)] rounded-lg cursor-pointer"></div>
+                <div><label for="previewUrl" class="block text-sm font-medium text-[var(--muted-fg)] mb-1">Preview URL</label><input type="url" id="previewUrl" placeholder="https://example.blogspot.com/" required class="w-full px-4 py-2 bg-[var(--bg)] border border-[var(--border)] rounded-lg focus:ring-2 focus:ring-sky-500 focus:border-sky-500 transition"></div>
+            </div>
+        </div>
+
+        <div class="bg-[var(--card-bg)] p-6 md:p-8 rounded-2xl shadow-lg">
+            <h2 class="text-2xl font-semibold text-[var(--fg)] border-b border-[var(--border)] pb-4 mb-6">Gallery Images <span class="text-sm font-normal text-slate-400">(Optional)</span></h2>
+            <input type="file" id="galleryImages" multiple accept="image/*" class="w-full text-sm text-slate-500 border border-[var(--border)] rounded-lg cursor-pointer">
+            <div id="galleryPreview" class="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 gap-4 mt-4"></div>
+        </div>
+
+        <div class="bg-[var(--card-bg)] p-6 md:p-8 rounded-2xl shadow-lg">
+            <h2 class="text-2xl font-semibold text-[var(--fg)] border-b border-[var(--border)] pb-4 mb-6">Post Content</h2>
+            <label for="postDescription" class="block text-sm font-medium text-[var(--muted-fg)] mb-1">Description</label>
+            <textarea id="postDescription" rows="5" class="w-full px-4 py-2 bg-[var(--bg)] border border-[var(--border)] rounded-lg focus:ring-2 focus:ring-sky-500 focus:border-sky-500 transition">Are you looking for a <strong>high-performance, visually stunning, and SEO-optimized</strong> Blogger template that can <strong>boost your traffic, engagement, and revenue</strong>? Look no further! <strong>Apmody 2.0</strong> is here to transform your blog into a <strong>professional, fast-loading, and mobile-friendly</strong> website that ranks higher on Google and keeps visitors coming back for more.</textarea>
+        </div>
+        
+        <button type="button" onclick="generatePost()" id="generateBtn" class="w-full bg-sky-600 text-white font-bold py-3 px-6 rounded-lg hover:bg-sky-700 transition-all duration-300 disabled:bg-slate-400 disabled:cursor-not-allowed flex items-center justify-center space-x-3 shadow-lg shadow-sky-500/20 hover:shadow-xl hover:shadow-sky-500/30">
+            <svg id="spinner" class="animate-spin -ml-1 mr-3 h-5 w-5 text-white hidden" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>
+            <span id="btn-text">Generate Post HTML</span>
+        </button>
+    </form>
+
+    <div class="bg-[var(--card-bg)] p-6 md:p-8 rounded-2xl shadow-lg mt-10 max-w-6xl mx-auto">
+        <div class="flex justify-between items-center border-b border-[var(--border)] pb-4 mb-6">
+            <h2 class="text-2xl font-semibold text-[var(--fg)]">Generated HTML</h2>
+            <button id="copyBtn" class="bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-300 font-semibold text-sm px-4 py-2 rounded-lg hover:bg-slate-300 dark:hover:bg-slate-600 transition-colors flex items-center space-x-2">
+                <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"></path></svg>
+                <span>Copy</span>
+            </button>
+        </div>
+        <pre class="bg-[var(--bg)] p-4 rounded-lg overflow-x-auto"><code id="generatedHtml" class="text-sm">Generated HTML will appear here...</code></pre>
     </div>
 
     <script>
-        // --- COPY BUTTON SCRIPT ---
         document.getElementById('copyBtn').addEventListener('click', () => {
             const codeToCopy = document.getElementById('generatedHtml').textContent;
             if (navigator.clipboard && codeToCopy) {
                 navigator.clipboard.writeText(codeToCopy).then(() => {
-                    const originalText = document.querySelector('#copyBtn span').textContent;
-                    document.querySelector('#copyBtn span').textContent = 'Copied!';
+                    const copyBtnSpan = document.querySelector('#copyBtn span');
+                    copyBtnSpan.textContent = 'Copied!';
                     setTimeout(() => {
-                        document.querySelector('#copyBtn span').textContent = originalText;
+                        copyBtnSpan.textContent = 'Copy';
                     }, 2000);
                 }).catch(err => {
                     alert('Failed to copy!');
@@ -121,7 +116,6 @@
             }
         });
 
-        // --- MAIN APP SCRIPT ---
         document.addEventListener('DOMContentLoaded', () => {
             const today = new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: '2-digit' });
             document.getElementById('releaseDate').value = today;
@@ -187,6 +181,11 @@
                 buttonText.textContent = 'Uploading...';
                 generateButton.disabled = true;
 
+                // Collect all form data at the beginning
+                const postData = {};
+                const fields = ["postName", "platform", "developer", "releaseDate", "lastUpdate", "version", "views", "downloads", "format", "size", "license", "responsive", "darkMode", "browsers", "schemaMarkup", "languages", "colorOptions", "documentation", "postDescription", "previewUrl"];
+                fields.forEach(id => { postData[id] = document.getElementById(id).value; });
+
                 const mainImagePromise = uploadToGitHub(document.getElementById('mainImage').files[0], 'Assets/Image');
                 const downloadPromise = uploadToGitHub(document.getElementById('downloadFile').files[0], 'Assets/Theme');
                 
@@ -204,16 +203,13 @@
                     }
                     
                     if (galleryImageUrls.length > 0) {
-                         const galleryImagesHtml = galleryImageUrls.map(url => `  <img alt='image_alt' src='${url}'/>`).join('\n');
+                         // UPDATED: Use postData.postName for the alt text
+                         const galleryImagesHtml = galleryImageUrls.map(url => `  <img alt='${postData.postName}' src='${url}'/>`).join('\n');
                          galleryHtml = `\n\n<div class='glImg'>\n${galleryImagesHtml}\n</div>`;
                     }
                 }
 
                 buttonText.textContent = 'Generating HTML...';
-                
-                const postData = {};
-                const fields = ["postName", "platform", "developer", "releaseDate", "lastUpdate", "version", "views", "downloads", "format", "size", "license", "responsive", "darkMode", "browsers", "schemaMarkup", "languages", "colorOptions", "documentation", "postDescription", "previewUrl"];
-                fields.forEach(id => { postData[id] = document.getElementById(id).value; });
                 
                 const finalPreviewLink = `https://cdnix.pages.dev/preview/?u=${btoa(postData.previewUrl)}`;
 
