@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ThemeStash Post Generator (Updated)</title>
+    <title>ThemeStash Post Generator (Domain Update)</title>
     <style>
         :root { --contentL: #ddd; --linkC: #007bff; --bg: #f9f9f9; --textC: #333; }
         body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; background-color: var(--bg); color: var(--textC); padding: 20px; line-height: 1.6; }
@@ -83,6 +83,7 @@
             document.getElementById('lastUpdate').value = today;
         });
 
+        // UPDATED: This function now returns the relative path instead of the full GitHub URL.
         async function uploadToGitHub(file, path) {
             const reader = new FileReader();
             const fileContent = await new Promise((resolve, reject) => {
@@ -91,19 +92,24 @@
                 reader.readAsDataURL(file);
             });
             
+            const domainPrefix = 'themestash-';
+            const newFileName = domainPrefix + file.name.replace(/\s+/g, '-'); 
+            
             const response = await fetch(`/.netlify/functions/upload`, {
                 method: 'POST',
-                body: JSON.stringify({ filePath: `${path}/${file.name}`, fileContent })
+                body: JSON.stringify({ filePath: `${path}/${newFileName}`, fileContent })
             });
 
             if (!response.ok) {
                 const errorData = await response.json();
                 throw new Error(errorData.message || 'File upload failed.');
             }
-            const data = await response.json();
-            return data.download_url;
+            
+            // Return the relative path for use with your domain
+            return `/${path}/${newFileName}`;
         }
 
+        // UPDATED: This function now constructs URLs using your domain.
         async function generatePost() {
             const mainImageFile = document.getElementById('mainImage').files[0];
             const downloadFile = document.getElementById('downloadFile').files[0];
@@ -118,10 +124,18 @@
                 generateButton.value = "Uploading Files... Please Wait...";
                 generateButton.disabled = true;
 
-                const imageUrl = await uploadToGitHub(mainImageFile, 'Assets/Image');
-                const downloadUrl = await uploadToGitHub(downloadFile, 'Assets/Theme');
+                // Get relative paths from the upload function
+                const imagePath = await uploadToGitHub(mainImageFile, 'Assets/Image');
+                const downloadPath = await uploadToGitHub(downloadFile, 'Assets/Theme');
                 
                 generateButton.value = "Generating HTML...";
+                
+                // Define your domain here
+                const siteDomain = "https://themestash.netlify.app";
+                
+                // Create the full URLs using your domain
+                const finalImageUrl = siteDomain + imagePath;
+                const finalDownloadUrl = siteDomain + downloadPath;
 
                 const postData = {};
                 const fields = [
@@ -136,8 +150,7 @@
                 
                 const finalPreviewLink = `https://cdnix.pages.dev/preview/?u=${btoa(postData.previewUrl)}`;
 
-                // This HTML template is now updated based on your new structure.
-                const htmlOutput = `<img alt='${postData.postName} Template' src='${imageUrl}'/>
+                const htmlOutput = `<img alt='${postData.postName} Template' src='${finalImageUrl}'/>
 
 <div class="pST">
     <div><div><i class="hgi-stroke hgi-file-01"></i></div><div><span>Name</span><span>${postData.postName}</span></div></div>
@@ -162,7 +175,7 @@
 <p>${postData.postDescription}</p>
 
 <div class="button-grid">
-    <a class="button safeL" href="${downloadUrl}"><i class="icon dl"></i>Download</a>
+    <a class="button safeL" href="${finalDownloadUrl}"><i class="icon dl"></i>Download</a>
     <a class="button" href="${finalPreviewLink}" target="_blank"><i class="icon eye"></i>Preview</a>
 </div>
 <p><strong>Stay Updated!</strong><br>
