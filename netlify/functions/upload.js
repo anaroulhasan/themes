@@ -3,62 +3,78 @@ const { Octokit } = require("@octokit/rest");
 
 // The main handler for the Netlify function. All requests are processed here.
 exports.handler = async function(event) {
-    // Only accept POST requests. Return an error for any other method.
+    // Only accept POST requests.
     if (event.httpMethod !== 'POST') {
         return {
-            statusCode: 405, // 405 Method Not Allowed
+            statusCode: 405,
             body: JSON.stringify({ message: 'Method Not Allowed.' })
         };
     }
 
     try {
-        // Parse the data (filePath and fileContent) sent from the frontend.
         const { filePath, fileContent } = JSON.parse(event.body);
 
-        // If filePath or fileContent is missing, return an error.
         if (!filePath || !fileContent) {
             return {
-                statusCode: 400, // 400 Bad Request
+                statusCode: 400,
                 body: JSON.stringify({ message: 'File path or content is missing.' })
             };
         }
 
-        // Initialize Octokit using the GitHub token stored as an environment variable in Netlify.
         const octokit = new Octokit({
             auth: process.env.GITHUB_TOKEN,
         });
 
-        // Your GitHub repository information.
-        const owner = 'anaroulhasan'; // Your GitHub username
-        const repo = 'themes';        // Your repository name
+        const owner = 'anaroulhasan';
+        const repo = 'themes';
+        const branch = 'main';
+        
+        let existingFileSha = undefined;
+
+        // --- NEW: Check if the file already exists ---
+        try {
+            const { data } = await octokit.repos.getContent({
+                owner,
+                repo,
+                path: filePath,
+                ref: branch,
+            });
+            // If the file exists, get its sha
+            if (data && data.sha) {
+                existingFileSha = data.sha;
+            }
+        } catch (error) {
+            // A 404 error means the file does not exist, which is fine.
+            // We can ignore it and proceed to create the file.
+            if (error.status !== 404) {
+                throw error; // Re-throw other errors
+            }
+        }
+        // --- END OF NEW LOGIC ---
 
         // Send a request to the GitHub API to create or update the file.
-        const response = await octokit.repos.createOrUpdateFileContents({
+        const { data: { content } } = await octokit.repos.createOrUpdateFileContents({
             owner,
             repo,
-            path: filePath, // e.g., "Assets/Image/my-image.png"
-            message: `feat: Add new file at ${filePath}`, // Commit message
-            content: fileContent, // The file content, in base64 format
-            branch: 'main',       // Your default branch name (could be 'main' or 'master')
+            path: filePath,
+            message: `feat: ${existingFileSha ? 'Update' : 'Add'} ${filePath}`, // Dynamic commit message
+            content: fileContent,
+            branch: branch,
+            sha: existingFileSha, // Pass the sha if updating an existing file
         });
         
-        // If the file is uploaded successfully, get its download URL.
-        const download_url = response.data.content.download_url;
-
-        // After a successful upload, send a confirmation message and the download URL to the frontend.
         return {
-            statusCode: 200, // 200 OK
+            statusCode: 200,
             body: JSON.stringify({
                 message: "File uploaded successfully!",
-                download_url: download_url
+                download_url: content.download_url // The GitHub raw URL
             }),
         };
 
     } catch (error) {
-        // If an error occurs (e.g., bad token, no permission), log it and return a detailed error message.
         console.error('GitHub API Error:', error);
         return {
-            statusCode: error.status || 500, // 500 Internal Server Error
+            statusCode: error.status || 500,
             body: JSON.stringify({ message: `Error uploading to GitHub: ${error.message}` }),
         };
     }
