@@ -46,8 +46,6 @@
                 <div><label for="releaseDate" class="block text-sm font-medium text-[var(--muted-fg)] mb-1">Release Date</label><input type="text" id="releaseDate" class="w-full px-4 py-2 bg-[var(--bg)] border border-[var(--border)] rounded-lg focus:ring-2 focus:ring-sky-500 focus:border-sky-500 transition"></div>
                 <div><label for="lastUpdate" class="block text-sm font-medium text-[var(--muted-fg)] mb-1">Last Update</label><input type="text" id="lastUpdate" class="w-full px-4 py-2 bg-[var(--bg)] border border-[var(--border)] rounded-lg focus:ring-2 focus:ring-sky-500 focus:border-sky-500 transition"></div>
                 <div><label for="version" class="block text-sm font-medium text-[var(--muted-fg)] mb-1">Version</label><input type="text" id="version" value="2.0" class="w-full px-4 py-2 bg-[var(--bg)] border border-[var(--border)] rounded-lg focus:ring-2 focus:ring-sky-500 focus:border-sky-500 transition"></div>
-                <div><label for="views" class="block text-sm font-medium text-[var(--muted-fg)] mb-1">Views</label><input type="number" id="views" value="200" class="w-full px-4 py-2 bg-[var(--bg)] border border-[var(--border)] rounded-lg focus:ring-2 focus:ring-sky-500 focus:border-sky-500 transition"></div>
-                <div><label for="downloads" class="block text-sm font-medium text-[var(--muted-fg)] mb-1">Downloads</label><input type="number" id="downloads" value="40" class="w-full px-4 py-2 bg-[var(--bg)] border border-[var(--border)] rounded-lg focus:ring-2 focus:ring-sky-500 focus:border-sky-500 transition"></div>
                 <div><label for="format" class="block text-sm font-medium text-[var(--muted-fg)] mb-1">Format</label><select id="format" class="w-full px-4 py-2 bg-[var(--bg)] border border-[var(--border)] rounded-lg focus:ring-2 focus:ring-sky-500 focus:border-sky-500 transition"><option value="XML" selected>XML</option><option value="ZIP">ZIP</option></select></div>
                 <div><label for="size" class="block text-sm font-medium text-[var(--muted-fg)] mb-1">Size</label><input type="text" id="size" value="121KB" class="w-full px-4 py-2 bg-[var(--bg)] border border-[var(--border)] rounded-lg focus:ring-2 focus:ring-sky-500 focus:border-sky-500 transition"></div>
                 <div><label for="license" class="block text-sm font-medium text-[var(--muted-fg)] mb-1">License</label><select id="license" class="w-full px-4 py-2 bg-[var(--bg)] border border-[var(--border)] rounded-lg focus:ring-2 focus:ring-sky-500 focus:border-sky-500 transition"><option value="Personal Use" selected>Personal Use</option><option value="Commercial Use">Commercial Use</option></select></div>
@@ -221,8 +219,8 @@
     <div><div><i class="hgi-stroke hgi-calendar-03"></i></div><div><span>Release</span><span>${postData.releaseDate}</span></div></div>
     <div><div><i class="hgi-stroke hgi-workflow-circle-06"></i></div><div><span>Last Update</span><span>${postData.lastUpdate}</span></div></div>
     <div><div><i class="hgi-stroke hgi-saturn-01"></i></div><div><span>Version</span><span>${postData.version}</span></div></div>
-    <div><div><i class="hgi-stroke hgi-view"></i></div><div><span>Views</span><span>${postData.views}</span></div></div>
-    <div><div><i class="hgi-stroke hgi-cloud-download"></i></div><div><span>Downloads</span><span>${postData.downloads}</span></div></div>
+    <div><div><i class="hgi-stroke hgi-view"></i></div><div><span>Views</span><span class="tVEcuN">${postData.views}</span></div></div>
+    <div><div><i class="hgi-stroke hgi-cloud-download"></i></div><div><span>Downloads</span><span class="tDLcuN">${postData.downloads}</span></div></div>
     <div><div><i class="hgi-stroke hgi-xml-01"></i></div><div><span>Format</span><span>${postData.format}</span></div></div>
     <div><div><i class="hgi-stroke hgi-usb-memory-01"></i></div><div><span>Size</span><span>${postData.size}</span></div></div>
     <div><div><i class="hgi-stroke hgi-crown"></i></div><div><span>License</span><span>${postData.license}</span></div></div>
@@ -236,7 +234,7 @@
 </div>
 <div>${postData.postDescription}</div>
 <div class="button-grid">
-    <a class="button safeL" href="${downloadUrl}"><i class="icon dl"></i>Download</a>
+    <a class="button safeL tBTNcuN" href="${downloadUrl}"><i class="icon dl"></i>Download</a>
     <a class="button" href="${finalPreviewLink}" target="_blank"><i class="icon eye"></i>Preview</a>
 </div>`;
 
